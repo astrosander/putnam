@@ -1,45 +1,287 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Putnam Subdomain</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berea Putnam Project · Student‑Run, Faculty‑Advised</title>
+  <meta name="description" content="Berea College Putnam training hub: weekly mini‑mocks, proof playbook, results, schedule, and resources. Student‑run; faculty‑advised by Dr. Rachelle Bouchat (they/she)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 2rem;
-      background: #f8fafc;
-      color: #111827;
-      line-height: 1.6;
+    :root{
+      --bg:#0f172a;          /* slate-900 */
+      --panel:#111827;       /* gray-900 */
+      --panel2:#0b1224;      /* dark variant */
+      --muted:#94a3b8;       /* slate-400 */
+      --text:#e5e7eb;        /* gray-200 */
+      --accent:#22d3ee;      /* cyan-400 */
+      --accent2:#a78bfa;     /* violet-400 */
+      --ok:#34d399;          /* emerald-400 */
+      --warn:#f59e0b;        /* amber-500 */
+      --bad:#fb7185;         /* rose-400 */
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
     }
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    h1 {
-      font-size: 2rem;
-      color: #2563eb;
-    }
-    .box {
-      max-width: 600px;
-      margin: auto;
-      padding: 1.5rem;
-      background: #fff;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),#0a1222 60%,#070d1a);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    header{position:sticky;top:0;z-index:50;background:rgba(10,18,34,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .pill{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001018;font-weight:700;box-shadow:var(--shadow)}
+    main{padding:28px 0 80px}
+    section{margin:36px 0;padding:26px;border-radius:var(--radius);background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:var(--shadow)}
+    h1,h2,h3{line-height:1.2;margin:0 0 12px}
+    h1{font-size:clamp(28px,4vw,38px)}
+    h2{font-size:clamp(22px,3.2vw,28px)}
+    h3{font-size:clamp(18px,2.6vw,22px)}
+    p{margin:.4rem 0 1rem}
+    .grid{display:grid;gap:16px}
+    .cols-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:14px}
+    .card{padding:18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+    .muted{color:var(--muted)}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;background:#0d1a33;border:1px solid rgba(255,255,255,.08);color:var(--text)}
+    .btn:hover{background:#0f2144}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .kicker{font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:var(--muted)}
+    code,pre{background:#0b1224;border:1px solid rgba(255,255,255,.08);border-radius:10px}
+    pre{padding:14px;overflow:auto}
+    ul{margin:.25rem 0 .75rem 1.25rem}
+    .badge{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.15);font-size:12px;color:var(--muted)}
+    .success{color:#062218;background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.4)}
+    .danger{color:#30080d;background:rgba(251,113,133,.14);border-color:rgba(251,113,133,.5)}
+    .warn{color:#271a00;background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.5)}
+    .notice{font-size:14px;color:var(--muted);background:rgba(255,255,255,.04);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.06)}
+    .list-people{columns:2;column-gap:24px}
+    @media (max-width:700px){.stats{grid-template-columns:1fr}.list-people{columns:1}}
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to putnam.melnichenka.com!</h1>
-    <p>This site is served from GitHub Pages.</p>
+    <div class="wrap nav">
+      <div class="brand">Berea Putnam Project</div>
+      <nav style="display:flex;gap:14px;align-items:center">
+        <a href="#schedule" class="btn">Schedule</a>
+        <a href="#weekly" class="btn">Weekly Set</a>
+        <a href="#results" class="pill">Results & Impact</a>
+      </nav>
+    </div>
   </header>
-  <div class="box">
-    <p>If you are seeing this page, the DNS and GitHub Pages setup for the 
-       <code>putnam.melnichenka.com</code> subdomain is working!</p>
-    <p>You can now edit <code>index.html</code> to add your own content.</p>
-  </div>
+
+  <main class="wrap">
+    <section id="hero">
+      <div class="kicker">Student‑run · Faculty‑advised (Dr. Rachelle Bouchat, they/she)</div>
+      <h1>Putnam at Berea — train like a team, write like mathematicians, make school history.</h1>
+      <p>Welcome to the hub for Berea College’s Putnam training. Our aim is simple: consistent practice, clean proofs, and a supportive culture that lifts everyone—from first‑timers to top scorers. This site complements official emails and logistics from <strong>Dr. Bouchat</strong> and stays aligned with their goals. All levels welcome; different people will have different goals, and we respect that.</p>
+      <div class="cta">
+        <a class="pill" href="#weekly">Start this week’s set</a>
+        <a class="btn" href="#playbook">Proof playbook</a>
+        <a class="btn" href="#resources">Resources</a>
+      </div>
+      <div style="margin-top:14px" class="notice">This is a student initiative led by <strong>Aliaksandr (Alex) Melnichenka</strong> that supports students Putnam training. For official announcements/registration, please refer to emails from <strong>Dr. Rachelle Bouchat</strong>.</div>
+
+      <div style="margin-top:18px" class="stats">
+        <div class="card"><div class="kicker">Participants this term</div><h2 id="stat-part">0</h2><div class="muted">Active members attending sessions</div></div>
+        <div class="card"><div class="kicker">Team median (latest mock)</div><h2 id="stat-median">—</h2><div class="muted">We publish trend lines weekly</div></div>
+        <div class="card"><div class="kicker">Top practice score</div><h2 id="stat-top">—</h2><div class="muted">Celebrating progress, not just peaks</div></div>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule & Logistics</h2>
+      <p><span class="badge success">New</span> <strong>First meeting:</strong> Friday, <em>September 12</em>, 4:00–6:00 PM in MAC (room TBA) with pizza and <strong>Dr. Rachelle Bouchat</strong>. Every other Friday thereafter at the same time. Please watch for <em>official</em> details from Dr. B via email.</p>
+      <p><span class="badge">Add‑on</span> <strong>Student‑only “Power Hour” (Saturdays):</strong> one hour of quiet, peer‑led problem‑solving. Time/location announced in Discord at the start of each week.</p>
+      <div class="card">
+        <h3>Key dates</h3>
+        <ul>
+          <li>Team practice cadence: weekly mini‑mock; monthly full mock.</li>
+          <li>Registration target: mid‑October (official registration handled by Dr. Bouchat).</li>
+          <li>Competition day: Saturday, December 6.</li>
+        </ul>
+        <div class="notice">We defer to department policies and honor academic integrity. This site hosts original explanations and problems or past Putnam items with proper sourcing—never current/unauthorized course materials.</div>
+      </div>
+    </section>
+
+    <section id="roster">
+      <h2>Roster (interest list)</h2>
+      <p class="muted">Maintained by students; official roster/registration is handled by Dr. Bouchat. To adjust an entry, email <a href="mailto:melnichenkaa@berea.edu">melnichenkaa@berea.edu</a>.</p>
+      <div class="card">
+        <h3>Faculty & student leads</h3>
+        <p><strong>Faculty advisor:</strong> Dr. Rachelle Bouchat (they/she)</p>
+        <p><strong>Student organizer:</strong> Aliaksandr (Alex) Melnichenka</p>
+      </div>
+      <div class="grid cols-3" style="margin-top:10px">
+        <div class="card">
+          <h3>Participants</h3>
+          <div class="list-people">
+            <div>Aliaksandr Melnichenka</div>
+            <div>Eric M. Sparks</div>
+            <div>Bishal Timalsina</div>
+            <div>Bogdan Mironov</div>
+            <div>Miguel A. Robledo‑Lopez</div>
+            <div>Hunter Brown</div>
+            <div>Ryan Bailey</div>
+            <!-- <div>Mohanad A. Elagan <span class="badge warn" style="color:var(--warn);">considering</span></div> -->
+            <div>Abigail E. Dodge</div>
+            <div>Joshua M. Patel</div>
+            <div>Finn Strange <span class="badge">HS</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Join the team</h3>
+          <p>Interested? Please reply to Dr. Bouchat’s email to be on the official list, then optionally ping the student Discord for practice logistics.</p>
+          <p><a class="btn" href="#weekly">Start this week’s set</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="weekly">
+      <h2>Weekly Training</h2>
+      <p>Each week we publish a mini‑mock (A1–A3, B1–B2), a 90‑second intro video, and clean solutions after the session. Submit scans as PDF.</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Week 1 · Mini‑Mock</h3>
+          <p class="muted">Focus: inequalities + induction</p>
+          <p><a class="btn" href="#">Download problems (PDF)</a></p>
+          <p><a class="btn" href="#">Submit solutions (PDF)</a></p>
+          <p class="notice">Solutions unlock after Friday’s session. We encourage independent attempts first.</p>
+        </div>
+        <div class="card">
+          <h3>Week 1 · Solution Pack</h3>
+          <p class="muted">Model write‑ups for two problems</p>
+          <p><a class="btn" href="#">View solutions</a></p>
+        </div>
+        <div class="card">
+          <h3>Office Hours</h3>
+          <p>Short 1:1 slots for feedback on proofs. Sign up each week in Discord.</p>
+          <p><span class="badge">Student‑only</span> Saturday Power Hour</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="playbook">
+      <h2>Proof Playbook</h2>
+      <p class="muted">Eight moves that crack most A1–A3 / B1–B2 problems. Learn the patterns, then write them clearly.</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>Induction & invariants</h3><ul><li>Strong/double induction on structure</li><li>Monovariants</li></ul></div>
+        <div class="card"><h3>Inequalities</h3><ul><li>AM‑GM, Cauchy‑Schwarz/Titu’s</li><li>Jensen/convexity, rearrangement</li></ul></div>
+        <div class="card"><h3>Number theory</h3><ul><li>Parity, modular arithmetic</li><li>Pigeonhole, orders (lite)</li></ul></div>
+        <div class="card"><h3>Combinatorics</h3><ul><li>Extremal, invariants</li><li>Double counting, injections</li></ul></div>
+        <div class="card"><h3>Series/analysis</h3><ul><li>Telescoping</li><li>Integral bounds & estimates</li></ul></div>
+        <div class="card"><h3>Algebra/polynomials</h3><ul><li>Vieta, factor patterns</li><li>Root bounds, Newton sums (lite)</li></ul></div>
+        <div class="card"><h3>Linear algebra ideas</h3><ul><li>Rank‑nullity insight</li><li>Trace/det invariants, PSD via A Aᵀ</li></ul></div>
+        <div class="card"><h3>Functional sanity</h3><ul><li>Plug easy points</li><li>Monotonicity/injectivity checks</li></ul></div>
+        <div class="card">
+          <h3>Write‑up Standard</h3>
+          <p>State the claim → one‑line idea → proof steps → edge cases → boxed result. Clean partials get credit.</p>
+          <a class="btn" href="#latex">Get the LaTeX template</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="mockexams">
+      <h2>Mock Exams</h2>
+      <p>We run one full 6‑problem mock each month under timed conditions. Scores are private to you; team stats are published in aggregate.</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>Full Mock #1</h3><p class="muted">Late October</p><p><a class="btn" href="#">Register</a></p></div>
+        <div class="card"><h3>Full Mock #2</h3><p class="muted">Mid November</p><p><a class="btn" href="#">Register</a></p></div>
+        <div class="card"><h3>Grade rubric</h3><p>How partial credit works & common pitfalls.</p><p><a class="btn" href="#">View rubric</a></p></div>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Results & Impact</h2>
+      <p>We track participation and progress to celebrate effort and improve training. Below are public, aggregate metrics; individual scores stay private.</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>Attendance</h3><p class="muted">Weekly session turnout</p><div id="chart1" style="height:140px"></div></div>
+        <div class="card"><h3>Median mock score</h3><p class="muted">Trend over time</p><div id="chart2" style="height:140px"></div></div>
+        <div class="card"><h3>Best student solutions</h3><p>Selected, anonymized write‑ups published with permission after review.</p></div>
+      </div>
+      <p class="notice">Transparency promise: we publish only what helps the team grow. No public ranking of individuals; leaders focus on coaching, not chasing points.</p>
+    </section>
+
+    <section id="latex">
+      <h2>LaTeX Template (download & use)</h2>
+      <pre><code>\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem*{claim}{Claim}
+\begin{document}
+\section*{Putnam Practice #N \quad Your Name}
+\subsection*{Problem A1}
+\begin{claim}
+% State the result you will prove.
+\end{claim}
+\textbf{Idea.} % One sentence describing the key move.
+\medskip
+\textbf{Proof.} % Clear, stepwise argument; justify each step.
+\qed
+\subsection*{Checks}
+% Edge cases, bounds, domains.
+\end{document}</code></pre>
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <div class="grid cols-3">
+        <div class="card"><h3>Official Putnam</h3><p><a href="https://maa.org/putnam/" target="_blank" rel="noopener">maa.org/putnam</a></p><p class="muted">Rules, dates, and history</p></div>
+        <div class="card"><h3>Past Exams & Solutions</h3><p><a href="https://kskedlaya.org/putnam-archive/" target="_blank" rel="noopener">kskedlaya.org/putnam-archive</a></p><p class="muted">1985–present archive</p></div>
+        <div class="card"><h3>Warm‑up Set</h3><p><a href="#">Top 25 starter problems</a> (with hints; solutions released after session)</p></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>This site is maintained by students to make practice simple and consistent. It exists to support the department’s goals and the wide range of student motivations—from curiosity to competition. Feedback welcome.</p>
+      <p class="muted">Faculty‑advised by <strong>Dr. Rachelle Bouchat (they/she)</strong>. Student contact: <a href="mailto:melnichenkaa@berea.edu">melnichenkaa@berea.edu</a>.</p>
+    </section>
+
+    <footer class="wrap" style="margin-top:40px;color:var(--muted);text-align:center">
+      <p style="font-size:14px">© <span id="year"></span> Berea Putnam Project — Student‑run; faculty‑advised. This site complements official communications from the Mathematics Department.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Lightweight demo data (edit these three numbers weekly without touching layout)
+    const stats = { participants: 10, median: 18, top: 36 };
+    document.getElementById('stat-part').textContent = stats.participants;
+    document.getElementById('stat-median').textContent = (stats.median === null ? '—' : stats.median);
+    document.getElementById('stat-top').textContent = (stats.top === null ? '—' : stats.top);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Tiny inline charts (no libs). Replace series with real weekly numbers.
+    function miniChart(elId, series){
+      const el = document.getElementById(elId);
+      const w = el.clientWidth, h = el.clientHeight;
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS,'svg');
+      svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+      svg.style.width = '100%'; svg.style.height = '100%';
+      const max = Math.max(...series, 1), min = Math.min(...series, 0);
+      const path = series.map((v,i)=>{
+        const x = (i/(series.length-1||1))*w;
+        const y = h - ((v-min)/(max-min||1))*h;
+        return `${i?'L':'M'}${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+      const grid = document.createElementNS(svgNS,'rect');
+      grid.setAttribute('x',0); grid.setAttribute('y',0); grid.setAttribute('width',w); grid.setAttribute('height',h);
+      grid.setAttribute('fill','rgba(255,255,255,.03)'); grid.setAttribute('rx','8');
+      const p = document.createElementNS(svgNS,'path');
+      p.setAttribute('d', path); p.setAttribute('fill','none'); p.setAttribute('stroke','url(#grad)'); p.setAttribute('stroke-width','3');
+      const defs = document.createElementNS(svgNS,'defs');
+      const grad = document.createElementNS(svgNS,'linearGradient'); grad.id='grad'; grad.setAttribute('x1','0'); grad.setAttribute('x2','1'); grad.setAttribute('y1','0'); grad.setAttribute('y2','0');
+      const s1 = document.createElementNS(svgNS,'stop'); s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','var(--accent)');
+      const s2 = document.createElementNS(svgNS,'stop'); s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','var(--accent2)');
+      grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad);
+      svg.appendChild(defs); svg.appendChild(grid); svg.appendChild(p); el.appendChild(svg);
+    }
+    // Example demo data (replace weekly)
+    miniChart('chart1',[6,8,9,10,10]);
+    miniChart('chart2',[10,12,14,16,18]);
+  </script>
 </body>
 </html>
